@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports 
+              http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="simple_transactions" pageWidth="595" pageHeight="842">
+    
+    <!-- PARAMETERS: Values passed from Java code -->
+    <parameter name="accountName" class="java.lang.String"/>
+    
+    <!-- FIELDS: Values from each row of data -->
+    <field name="date" class="java.lang.String"/>
+    <field name="description" class="java.lang.String"/>
+    <field name="amount" class="java.lang.Double"/>
+    
+    <!-- TITLE: Shown once at the top -->
+    <title>
+        <band height="80">
+            <staticText>
+                <reportElement x="50" y="20" width="500" height="30"/>
+                <textElement textAlignment="Center">
+                    <font size="18" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Bank Transaction Report]]></text>
+            </staticText>
+            
+            <staticText>
+                <reportElement x="50" y="55" width="80" height="20"/>
+                <textElement>
+                    <font size="10" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Account:]]></text>
+            </staticText>
+            
+            <textField>
+                <reportElement x="130" y="55" width="200" height="20"/>
+                <textElement>
+                    <font size="10"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{accountName}]]></textFieldExpression>
+            </textField>
+        </band>
+    </title>
+    
+    <!-- COLUMN HEADER: Shown once before data rows -->
+    <columnHeader>
+        <band height="30">
+            <staticText>
+                <reportElement x="50" y="5" width="100" height="20"/>
+                <box>
+                    <pen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Center">
+                    <font size="10" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Date]]></text>
+            </staticText>
+            
+            <staticText>
+                <reportElement x="150" y="5" width="250" height="20"/>
+                <box>
+                    <pen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Center">
+                    <font size="10" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Description]]></text>
+            </staticText>
+            
+            <staticText>
+                <reportElement x="400" y="5" width="100" height="20"/>
+                <box>
+                    <pen lineWidth="1.0"/>
+                </box>
+                <textElement textAlignment="Center">
+                    <font size="10" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Amount]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+    
+    <!-- DETAIL: Repeated for each row of data -->
+    <detail>
+        <band height="25">
+            <textField>
+                <reportElement x="50" y="0" width="100" height="20"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center"/>
+                <textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
+            </textField>
+            
+            <textField>
+                <reportElement x="150" y="0" width="250" height="20"/>
+                <box leftPadding="5">
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement/>
+                <textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+            </textField>
+            
+            <textField pattern="₹ #,##0.00">
+                <reportElement x="400" y="0" width="100" height="20"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Right"/>
+                <textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    
+</jasperReport>
